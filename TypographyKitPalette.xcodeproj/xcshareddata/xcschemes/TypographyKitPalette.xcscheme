@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13EFE09F20D9420E00A0B65D"
-               BuildableName = "TypographyKitPalette"
-               BlueprintName = "TypographyKitPalette"
+               BuildableName = "palette"
+               BlueprintName = "palette"
                ReferencedContainer = "container:TypographyKitPalette.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13EFE09F20D9420E00A0B65D"
-            BuildableName = "TypographyKitPalette"
-            BlueprintName = "TypographyKitPalette"
+            BuildableName = "palette"
+            BlueprintName = "palette"
             ReferencedContainer = "container:TypographyKitPalette.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -56,8 +56,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13EFE09F20D9420E00A0B65D"
-            BuildableName = "TypographyKitPalette"
-            BlueprintName = "TypographyKitPalette"
+            BuildableName = "palette"
+            BlueprintName = "palette"
             ReferencedContainer = "container:TypographyKitPalette.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -93,8 +93,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13EFE09F20D9420E00A0B65D"
-            BuildableName = "TypographyKitPalette"
-            BlueprintName = "TypographyKitPalette"
+            BuildableName = "palette"
+            BlueprintName = "palette"
             ReferencedContainer = "container:TypographyKitPalette.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

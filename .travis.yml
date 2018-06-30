@@ -1,0 +1,9 @@
+language: objective-c
+osx_image: xcode9
+install:
+  - ./install_swiftlint.sh
+script:
+  - gem install travis --no-rdoc --no-ri
+  - travis lint .travis.yml --no-interactive
+  - swiftlint
+  - xcodebuild clean build -project TypographyKitPalette.xcodeproj -scheme TypographyKitPalette -destination "platform=macOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO

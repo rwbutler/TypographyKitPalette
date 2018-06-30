@@ -51,7 +51,7 @@
 		134AA2B720D968ED0002BBD8 /* CommandLineArgument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandLineArgument.swift; sourceTree = "<group>"; };
 		13B0D6DE20D94FF300339949 /* RegularExpressionMatchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegularExpressionMatchable.swift; sourceTree = "<group>"; };
 		13B0D6DF20D94FF400339949 /* String+RegularExpressionMatchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+RegularExpressionMatchable.swift"; sourceTree = "<group>"; };
-		13EFE0A020D9420E00A0B65D /* TypographyKitPalette */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TypographyKitPalette; sourceTree = BUILT_PRODUCTS_DIR; };
+		13EFE0A020D9420E00A0B65D /* palette */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = palette; sourceTree = BUILT_PRODUCTS_DIR; };
 		13EFE0A320D9420E00A0B65D /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,7 +77,7 @@
 		13EFE0A120D9420E00A0B65D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13EFE0A020D9420E00A0B65D /* TypographyKitPalette */,
+				13EFE0A020D9420E00A0B65D /* palette */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -107,9 +107,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		13EFE09F20D9420E00A0B65D /* TypographyKitPalette */ = {
+		13EFE09F20D9420E00A0B65D /* palette */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13EFE0A720D9420E00A0B65D /* Build configuration list for PBXNativeTarget "TypographyKitPalette" */;
+			buildConfigurationList = 13EFE0A720D9420E00A0B65D /* Build configuration list for PBXNativeTarget "palette" */;
 			buildPhases = (
 				13EFE09C20D9420E00A0B65D /* Sources */,
 				13EFE09D20D9420E00A0B65D /* Frameworks */,
@@ -119,9 +119,9 @@
 			);
 			dependencies = (
 			);
-			name = TypographyKitPalette;
+			name = palette;
 			productName = TypographyKitUtility;
-			productReference = 13EFE0A020D9420E00A0B65D /* TypographyKitPalette */;
+			productReference = 13EFE0A020D9420E00A0B65D /* palette */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -151,7 +151,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13EFE09F20D9420E00A0B65D /* TypographyKitPalette */,
+				13EFE09F20D9420E00A0B65D /* palette */,
 			);
 		};
 /* End PBXProject section */
@@ -325,7 +325,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13EFE0A720D9420E00A0B65D /* Build configuration list for PBXNativeTarget "TypographyKitPalette" */ = {
+		13EFE0A720D9420E00A0B65D /* Build configuration list for PBXNativeTarget "palette" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13EFE0A820D9420E00A0B65D /* Debug */,
