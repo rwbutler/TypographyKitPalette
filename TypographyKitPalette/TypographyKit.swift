@@ -9,7 +9,7 @@ import AppKit
 
 // Public interface
 public struct TypographyKit {
-    
+
     public static var configurationURL: URL? {
         didSet { // detect configuration format by extension
             guard let lastPathComponent = configurationURL?.lastPathComponent.lowercased() else { return }
@@ -21,7 +21,7 @@ public struct TypographyKit {
             }
         }
     }
-    
+
     // Lazily-initialised properties
     public static var configurationType: ConfigurationType = {
         for configurationType in ConfigurationType.values {
@@ -31,19 +31,19 @@ public struct TypographyKit {
         }
         return .plist // default
     }()
-    
+
     public static var pointStepSize: Float = {
         return configuration?.configurationSettings.pointStepSize ?? 2.0
     }()
-    
+
     public static var pointStepMultiplier: Float = {
         return configuration?.configurationSettings.pointStepMultiplier ?? 1.0
     }()
-    
+
     public static var colors: [String: NSColor] = {
         return configuration?.typographyColors ?? [:]
     }()
-    
+
     public static func refresh() {
         configuration = loadConfiguration()
     }
@@ -59,15 +59,15 @@ private extension TypographyKit {
                  create: true)
             .appendingPathComponent("\(configurationName).\(configurationType.rawValue)")
     }
-    
+
     static var configuration: ParsingServiceResult? = loadConfiguration()
-    
+
     static let configurationName: String = "TypographyKit"
-    
+
     static func bundledConfigurationURL(_ configType: ConfigurationType = TypographyKit.configurationType) -> URL? {
         return Bundle.main.url(forResource: configurationName, withExtension: configType.rawValue)
     }
-    
+
     static func loadConfiguration() -> ParsingServiceResult? {
         guard let configurationURL = configurationURL,
             let data = try? Data(contentsOf: configurationURL) else {
@@ -79,9 +79,9 @@ private extension TypographyKit {
         }
         return parseConfiguration(data: data)
     }
-    
+
     private static func parseConfiguration(data: Data) -> ParsingServiceResult? {
-        var parsingService: ParsingService? = nil
+        var parsingService: ParsingService?
         switch configurationType {
         case .plist:
             parsingService = PropertyListParsingService()

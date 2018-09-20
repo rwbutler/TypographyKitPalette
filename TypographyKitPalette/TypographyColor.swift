@@ -27,8 +27,8 @@ public enum TypographyColor {
     case clear
     case hex(string: String)
     case named(string: String)
-    case rgb(r: Float, g: Float, b: Float)
-    case rgba(r: Float, g: Float, b: Float, a: Float)
+    case rgb(red: Float, green: Float, blue: Float)
+    case rgba(red: Float, green: Float, blue: Float, alpha: Float)
 
     static var colorNameMap: [String: NSColor] {
         return ["black": .black,
@@ -88,16 +88,16 @@ public enum TypographyColor {
             return TypographyColor.colorNameMap[colorName]! // Previously validated
         case .hex(let hexString):
             return TypographyColor.parseHex(hexString: hexString)!.NSColor // Previously validated
-        case .rgb(let r, let g, let b):
-            return AppKit.NSColor(calibratedRed: CGFloat(r),
-             green: CGFloat(g),
-             blue: CGFloat(b),
+        case .rgb(let red, let green, let blue):
+            return AppKit.NSColor(calibratedRed: CGFloat(red),
+             green: CGFloat(green),
+             blue: CGFloat(blue),
              alpha: 1.0)
-        case .rgba(let r, let g, let b, let a):
-            return AppKit.NSColor(calibratedRed: CGFloat(r),
-                           green: CGFloat(g),
-                           blue: CGFloat(b),
-                           alpha: CGFloat(a))
+        case .rgba(let red, let green, let blue, let alpha):
+            return AppKit.NSColor(calibratedRed: CGFloat(red),
+                           green: CGFloat(green),
+                           blue: CGFloat(blue),
+                           alpha: CGFloat(alpha))
         }
     }
 
@@ -110,14 +110,13 @@ public enum TypographyColor {
             }
             return nil
         // swiftlint:disable:next line_length
-        case "rgb\\(([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5]),([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5]),([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\\)",
-             "\\(([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5]),([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5]),([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\\)":
+        case "rgb\\(([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5]),([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5]),([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\\)", "\\(([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5]),([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5]),([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\\)":
                 let rgbValues = type(of: self).rgbValues(from: string)
                 if rgbValues.count == 3,
                     let red = Float(rgbValues[0]),
                     let green = Float(rgbValues[1]),
                     let blue = Float(rgbValues[2]) {
-                    self = .rgb(r: red / 255.0, g: green / 255.0, b: blue / 255.0)
+                    self = .rgb(red: red / 255.0, green: green / 255.0, blue: blue / 255.0)
                     break
                 }
                 return nil
@@ -157,20 +156,21 @@ public enum TypographyColor {
         let unparsed = hexString.hasPrefix("#")
             ? String(hexString[startIdx..<hexString.endIndex])
             : hexString
-        let r = unparsed[unparsed.startIndex..<unparsed.index(unparsed.index(after: unparsed.startIndex), offsetBy: 1)]
         // swiftlint:disable:next line_length
-        let g = unparsed[unparsed.index(unparsed.startIndex, offsetBy: 2)..<unparsed.index(unparsed.startIndex, offsetBy: 4)]
-        let b = unparsed[unparsed.index(unparsed.startIndex, offsetBy: 4)..<unparsed.endIndex]
+        let rVal = unparsed[unparsed.startIndex..<unparsed.index(unparsed.index(after: unparsed.startIndex), offsetBy: 1)]
+        // swiftlint:disable:next line_length
+        let gVal = unparsed[unparsed.index(unparsed.startIndex, offsetBy: 2)..<unparsed.index(unparsed.startIndex, offsetBy: 4)]
+        let bVal = unparsed[unparsed.index(unparsed.startIndex, offsetBy: 4)..<unparsed.endIndex]
 
-        if let rInt = UInt(r, radix: 16),
-            let gInt = UInt(g, radix: 16),
-            let bInt = UInt(b, radix: 16) {
+        if let rInt = UInt(rVal, radix: 16),
+            let gInt = UInt(gVal, radix: 16),
+            let bInt = UInt(bVal, radix: 16) {
             let red = Float(rInt) / 255.0
             let green = Float(gInt) / 255.0
             let blue = Float(bInt) / 255.0
-            return .rgb(r: red,
-                        g: green,
-                        b: blue)
+            return .rgb(red: red,
+                        green: green,
+                        blue: blue)
         }
         return nil
     }

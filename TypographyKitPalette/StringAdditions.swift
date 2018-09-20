@@ -49,7 +49,7 @@ public extension String {
             } else {
                 if isLowercase {
                     buffer = buffer.appending(" \(dashesReplaced[substringStartIdx..<substringEndIdx])")
-                }else {
+                } else {
                     buffer = buffer.appending(dashesReplaced[substringStartIdx..<substringEndIdx])
                 }
                 isLowercase = false
@@ -58,7 +58,7 @@ public extension String {
         }
         return buffer.capitalized
     }
-    
+
     func kebabCased(preserveSuffix: Bool = false) -> String {
         return self.capitalizeSubSequences(capitalizeFirst: false, conjunction: "-", preserveSuffix: preserveSuffix)
     }

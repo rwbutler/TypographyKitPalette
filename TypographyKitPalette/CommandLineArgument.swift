@@ -13,7 +13,7 @@ enum CommandLineArgument: String {
     case colorListName = "--color-list"
     case configURLShorthand = "-c"
     case configURL = "--config-url"
-    
+
     init(argument: String) {
         switch argument {
         case CommandLineArgument.configURL.rawValue, CommandLineArgument.configURLShorthand.rawValue:
