@@ -10,46 +10,49 @@ import AppKit
 
 struct CommandLineProcessor {
 
-    func main() {
-        var colorListName: String?
-        var configURL: URL?
-        var populatingColorListName = false
-        var populatingConfigURL = false
+    var colorListName: String?
+    var configURL: URL?
+    var populatingColorListName = false
+    var populatingConfigURL = false
 
-        func resetPopulationFlags() {
-            populatingColorListName = false
-            populatingConfigURL = false
-        }
-
+    mutating func main() {
         for index in 1 ..< CommandLine.arguments.count {
-            let argument = CommandLineArgument(argument: CommandLine.arguments[index])
-            switch argument {
-            case .configURL, .configURLShorthand:
-                resetPopulationFlags()
-                populatingConfigURL = true
-            case .colorListName, .colorListNameShorthand:
-                resetPopulationFlags()
-                populatingColorListName = true
-            case .none:
-                if populatingColorListName {
-                    colorListName = CommandLine.arguments[index]
-                }
-                if populatingConfigURL {
-                    let url = CommandLine.arguments[index]
-                    if url.lowercased().starts(with: "https") ||
-                        url.lowercased().starts(with: "http") {
-                        configURL = URL(string: url)
-                    } else {
-                        configURL = URL(fileURLWithPath: url)
-                    }
-                }
-            }
+            processArgument(CommandLine.arguments[index])
         }
         guard let configurationURL = configURL, let colorList = colorListName else {
-            print("Must specify --color-list and --config-url arguments")
+            printUsage()
             return
         }
         processArguments(configURL: configurationURL, colorListName: colorList)
+    }
+
+    private func isHTTPURL(urlString: String) -> Bool {
+        return urlString.lowercased().starts(with: "https") ||
+            urlString.lowercased().starts(with: "http")
+    }
+
+    private func printUsage() {
+        print("Must specify --color-list and --config-url arguments")
+    }
+
+    private mutating func processArgument(_ argumentString: String) {
+        let argument = CommandLineArgument(argument: argumentString)
+        switch argument {
+        case .configURL, .configURLShorthand:
+            resetPopulationFlags()
+            populatingConfigURL = true
+        case .colorListName, .colorListNameShorthand:
+            resetPopulationFlags()
+            populatingColorListName = true
+        case .none:
+            if populatingColorListName {
+                colorListName = argumentString
+            }
+            if populatingConfigURL {
+                let urlString = argumentString
+                configURL = url(urlString: urlString)
+            }
+        }
     }
 
     private func processArguments(configURL: URL, colorListName: String) {
@@ -64,11 +67,25 @@ struct CommandLineProcessor {
             colorList.setColor(color, forKey: colorName.capitalized())
         }
         var outputURL = FileManager.default.homeDirectoryForCurrentUser
-            outputURL = outputURL
+        outputURL = outputURL
             .appendingPathComponent("Library")
             .appendingPathComponent("Colors")
             .appendingPathComponent("\(colorListName).clr")
         try? colorList.write(to: outputURL)
         exit(0)
     }
+
+    private mutating func resetPopulationFlags() {
+        populatingColorListName = false
+        populatingConfigURL = false
+    }
+
+    private func url(urlString: String) -> URL? {
+        if isHTTPURL(urlString: urlString) {
+            return URL(string: urlString)
+        } else {
+            return URL(fileURLWithPath: urlString)
+        }
+    }
+
 }

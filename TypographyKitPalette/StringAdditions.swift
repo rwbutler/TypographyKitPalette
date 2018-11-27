@@ -34,33 +34,22 @@ public extension String {
 
     func capitalized() -> String {
         let dashesReplaced = self.replacingOccurrences(of: "-", with: " ")
-        var isLowercase = true
+        var isPrevCharLowercase = true
         var buffer: String = ""
-        var index = 0
         for character in dashesReplaced {
-            let substringStartIdx = dashesReplaced.index(dashesReplaced.startIndex, offsetBy: index)
-            let substringEndIdx = dashesReplaced.index(substringStartIdx, offsetBy: 1)
-            if let codePoint = character.unicodeScalars.first?.value, codePoint >= 97, codePoint <= 122 {
-                buffer = buffer.appending(dashesReplaced[substringStartIdx..<substringEndIdx])
-                isLowercase = true
-            } else if let codePoint = character.unicodeScalars.first?.value, codePoint == 32 {
-                buffer = buffer.appending(dashesReplaced[substringStartIdx..<substringEndIdx])
-                isLowercase = false
-            } else {
-                if isLowercase {
-                    buffer = buffer.appending(" \(dashesReplaced[substringStartIdx..<substringEndIdx])")
-                } else {
-                    buffer = buffer.appending(dashesReplaced[substringStartIdx..<substringEndIdx])
-                }
-                isLowercase = false
+            if !(character.isLowercaseLatin() || character.isSpace()) && isPrevCharLowercase {
+                buffer = buffer.appending(" ")
             }
-            index += 1
+            isPrevCharLowercase = character.isLowercaseLatin()
+            buffer = buffer.appending(String(character))
         }
         return buffer.capitalized
     }
 
     func kebabCased(preserveSuffix: Bool = false) -> String {
-        return self.capitalizeSubSequences(capitalizeFirst: false, conjunction: "-", preserveSuffix: preserveSuffix)
+        return self.capitalizeSubSequences(shouldCapitalizeFirst: false,
+                                           conjunction: "-",
+                                           preserveSuffix: preserveSuffix)
     }
 
     func lowerCamelCased(preserveSuffix: Bool = false) -> String {
@@ -72,32 +61,73 @@ public extension String {
     }
 
     func macroCased() -> String {
-        return self.capitalizeSubSequences(capitalizeFirst: true, conjunction: "_").uppercased()
+        return self.capitalizeSubSequences(shouldCapitalizeFirst: true, conjunction: "_").uppercased()
     }
 
     func snakeCased() -> String {
-        return self.capitalizeSubSequences(capitalizeFirst: false)
+        return self.capitalizeSubSequences(shouldCapitalizeFirst: false)
     }
 
     func upperCamelCased(preserveSuffix: Bool = false) -> String {
-        return self.capitalizeSubSequences(capitalizeFirst: true, preserveSuffix: preserveSuffix)
+        return self.capitalizeSubSequences(shouldCapitalizeFirst: true, preserveSuffix: preserveSuffix)
     }
 
-    private func capitalizeSubSequences(capitalizeFirst: Bool,
+    private func capitalizeSequence(shouldCapitalizeFirst: Bool, conjunction: String, preserveSuffix: Bool) -> String {
+        guard let firstChar = self.first else { return self }
+        let firstCharacter = shouldCapitalizeFirst ? firstChar.uppercased() : firstChar.lowercased()
+        let newPrefix = String(firstCharacter)
+        let newSuffix = preserveSuffix ? suffix() : lowercasedSuffix()
+        return newPrefix + newSuffix + conjunction
+    }
+
+    private func capitalizeSubSequences(shouldCapitalizeFirst: Bool,
                                         conjunction: String = "",
                                         preserveSuffix: Bool = false) -> String {
         var result = ""
         for subSequence in self.split(separator: " ") {
-            if let firstChar = subSequence.first {
-                let prefixWithCase = (capitalizeFirst) ? String(firstChar).uppercased() : String(firstChar).lowercased()
-                let suffix = String(subSequence.dropFirst())
-                let suffixWithCase = preserveSuffix ? suffix : suffix.lowercased()
-                result += prefixWithCase + suffixWithCase + conjunction
-            }
+            let subString = String(subSequence)
+            result += subString.capitalizeSequence(shouldCapitalizeFirst: shouldCapitalizeFirst,
+                                                   conjunction: conjunction,
+                                                   preserveSuffix: preserveSuffix)
         }
-        if !conjunction.isEmpty, result.count > 0 {
+        if !conjunction.isEmpty, !result.isEmpty {
             return String(result.dropLast())
         }
         return result
     }
+
+    private func lowercasedSuffix() -> String {
+        return suffix().lowercased()
+    }
+
+    private func suffix() -> String {
+        return String(self.dropFirst())
+    }
+
+}
+
+extension Character {
+
+    private func firstUnicodeCodePoint() -> UInt32? {
+        return unicodeScalars.first?.value
+    }
+
+    func isLowercaseLatin() -> Bool {
+        guard let codePoint = firstUnicodeCodePoint() else { return false }
+        let lowercaseLatinCodePoints = UInt32(97)...UInt32(122)
+        return lowercaseLatinCodePoints.contains(codePoint)
+    }
+
+    func isSpace() -> Bool {
+        return (firstUnicodeCodePoint() ?? 0) == 32
+    }
+
+    func lowercased() -> Character {
+        return String(self).lowercased().first ?? Character("")
+    }
+
+    func uppercased() -> Character {
+        return String(self).uppercased().first ?? Character("")
+    }
+
 }
