@@ -1,6 +1,7 @@
 ![Palette for TypographyKit](Palette.png)
 
 [![CI Status](http://img.shields.io/travis/rwbutler/TypographyKitPalette.svg?style=flat)](https://travis-ci.org/rwbutler/TypographyKitPalette)
+[![Maintainability](https://api.codeclimate.com/v1/badges/0e476dc7f68ea48e61f2/maintainability)](https://codeclimate.com/github/rwbutler/TypographyKitPalette/maintainability)
 [![License](https://img.shields.io/cocoapods/l/TypographyKit.svg?style=flat)](http://cocoapods.org/pods/TypographyKit)
 ![Platform](https://img.shields.io/badge/platform-macOS-lightgrey.svg)
 [![Twitter](https://img.shields.io/badge/twitter-@TypographyKit-blue.svg?style=flat)](https://twitter.com/TypographyKit)
