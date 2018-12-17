@@ -84,7 +84,7 @@ struct CommandLineProcessor {
         if isHTTPURL(urlString: urlString) {
             return URL(string: urlString)
         } else {
-            return URL(fileURLWithPath: urlString)
+            return URL(fileURLWithPath: urlString).standardizedFileURL
         }
     }
 
