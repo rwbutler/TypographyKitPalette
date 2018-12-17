@@ -8,6 +8,17 @@
 
 Palette is a tool for use with [TypographyKit](https://github.com/rwbutler/TypographyKit) which takes your app's color palette as defined in your TypographyKit.json or TypographyKit.plist file and generates a palette for use in Xcode Interface Builder so that developers can easily make use of the same colors regardless of whether they are being assigned programmatically or through IB.
 
+# Installation
+
+## Homebrew
+
+To install using [Homebrew](https://brew.sh/):
+
+```
+brew tap rwbutler/tools
+brew install palette
+```
+
 # Usage
 
 The palette tool is invoked as follows:
