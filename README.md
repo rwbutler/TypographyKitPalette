@@ -15,7 +15,7 @@ Palette is a tool for use with [TypographyKit](https://github.com/rwbutler/Typog
 
 To install using [Homebrew](https://brew.sh/):
 
-```
+```bash
 brew tap rwbutler/tools
 brew install palette
 ```
