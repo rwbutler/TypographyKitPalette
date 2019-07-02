@@ -20,3 +20,4 @@ DerivedData
 .bundle
 Carthage
 !*.xcworkspace/contents.xcworkspacedata
+*.afdesign
