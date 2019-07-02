@@ -122,12 +122,4 @@ extension Character {
         return (firstUnicodeCodePoint() ?? 0) == 32
     }
 
-    func lowercased() -> Character {
-        return String(self).lowercased().first ?? Character("")
-    }
-
-    func uppercased() -> Character {
-        return String(self).uppercased().first ?? Character("")
-    }
-
 }

@@ -9,8 +9,8 @@ import Foundation
 
 struct JSONParsingService: ParsingService {
     func parse(_ data: Data) -> ParsingServiceResult? {
-        guard let jsonDictionary = try? JSONSerialization.jsonObject(with: data, options: [])
-            as? [String: Any],
+        guard let jsonDictionary = ((try? JSONSerialization.jsonObject(with: data, options: [])
+            as? [String: Any]) as [String: Any]??),
             let result = jsonDictionary else {
                 return nil
         }

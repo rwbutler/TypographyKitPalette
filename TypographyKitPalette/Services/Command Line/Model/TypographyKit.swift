@@ -32,16 +32,8 @@ public struct TypographyKit {
         return .plist // default
     }()
 
-    public static var pointStepSize: Float = {
-        return configuration?.configurationSettings.pointStepSize ?? 2.0
-    }()
-
-    public static var pointStepMultiplier: Float = {
-        return configuration?.configurationSettings.pointStepMultiplier ?? 1.0
-    }()
-
-    public static var colors: [String: NSColor] = {
-        return configuration?.typographyColors ?? [:]
+    public static var colors: TypographyColors = {
+        return configuration ?? [:]
     }()
 
     public static func refresh() {
