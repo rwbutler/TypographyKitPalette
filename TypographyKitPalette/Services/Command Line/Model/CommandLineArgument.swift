@@ -13,15 +13,13 @@ enum CommandLineArgument: String {
     case colorListName = "--color-list"
     case configURLShorthand = "-c"
     case configURL = "--config-url"
+    case assetCatalogURL = "--asset-catalog-path"
+    case assetCatalogURLShorthand = "-a"
+    case export = "--export"
+    case exportShorthand = "-e"
+}
 
-    init(argument: String) {
-        switch argument {
-        case CommandLineArgument.configURL.rawValue, CommandLineArgument.configURLShorthand.rawValue:
-            self = .configURL
-        case CommandLineArgument.colorListName.rawValue, CommandLineArgument.colorListNameShorthand.rawValue:
-            self = .colorListName
-        default:
-            self = .none
-        }
-    }
+enum Export: String {
+    case palette
+    case assetCatalog
 }

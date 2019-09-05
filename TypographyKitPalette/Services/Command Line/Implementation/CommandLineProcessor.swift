@@ -9,12 +9,14 @@ import Foundation
 import AppKit
 
 struct CommandLineProcessor {
-
+    
     var colorListName: String?
     var configURL: URL?
-    var populatingColorListName = false
-    var populatingConfigURL = false
-
+    var assetCatalogURL: URL?
+    var export: [Export] = [.assetCatalog, .palette]
+    
+    var currentlyPopulating: CommandLineArgument = .none
+    
     mutating func main() {
         for index in 1 ..< CommandLine.arguments.count {
             processArgument(CommandLine.arguments[index])
@@ -25,61 +27,59 @@ struct CommandLineProcessor {
         }
         processArguments(configURL: configurationURL, colorListName: colorList)
     }
-
+    
     private func isHTTPURL(urlString: String) -> Bool {
         return urlString.lowercased().starts(with: "https") ||
             urlString.lowercased().starts(with: "http")
     }
-
+    
     private func printUsage() {
         print("Must specify --color-list and --config-url arguments")
     }
-
+    
     private mutating func processArgument(_ argumentString: String) {
-        let argument = CommandLineArgument(argument: argumentString)
-        switch argument {
+        if let argument = CommandLineArgument(rawValue: argumentString) {
+            currentlyPopulating = argument
+            
+            if [.export, .exportShorthand].contains(argument) {
+                export = []
+            }
+            return
+        }
+        
+        switch currentlyPopulating {
         case .configURL, .configURLShorthand:
-            resetPopulationFlags()
-            populatingConfigURL = true
+            configURL = url(urlString: argumentString)
         case .colorListName, .colorListNameShorthand:
-            resetPopulationFlags()
-            populatingColorListName = true
+            colorListName = argumentString
+        case .assetCatalogURL, .assetCatalogURLShorthand:
+            assetCatalogURL = url(urlString: argumentString)
+        case .export, .exportShorthand:
+            if let exportType = Export(rawValue: argumentString) {
+                export.append(exportType)
+            }
         case .none:
-            if populatingColorListName {
-                colorListName = argumentString
-            }
-            if populatingConfigURL {
-                let urlString = argumentString
-                configURL = url(urlString: urlString)
-            }
+            break
         }
     }
-
+    
     private func processArguments(configURL: URL, colorListName: String) {
         TypographyKit.configurationURL = configURL
         TypographyKit.refresh()
-        let colorList = NSColorList(name: colorListName)
-        TypographyKit.colors.sorted(by: { (arg1, arg2) in
-            let (colorName, _) = arg1, (colorName2, _) = arg2
-            return colorName < colorName2
-        }).forEach { (arg) in
-            let (colorName, color) = arg
-            colorList.setColor(color, forKey: colorName.capitalized())
+        
+        let colors = TypographyKit.colors
+        
+        if export.contains(.assetCatalog) {
+            AssetCatalogExportingService(baseURL: assetCatalogURL).export(colors: colors, colorListName: colorListName)
         }
-        var outputURL = FileManager.default.homeDirectoryForCurrentUser
-        outputURL = outputURL
-            .appendingPathComponent("Library")
-            .appendingPathComponent("Colors")
-            .appendingPathComponent("\(colorListName).clr")
-        try? colorList.write(to: outputURL)
+        if export.contains(.palette) {
+            ColorPaletteExportingService().export(colors: colors, colorListName: colorListName)
+        }
+        
         exit(0)
     }
-
-    private mutating func resetPopulationFlags() {
-        populatingColorListName = false
-        populatingConfigURL = false
-    }
-
+    
+    
     private func url(urlString: String) -> URL? {
         if isHTTPURL(urlString: urlString) {
             return URL(string: urlString)
@@ -87,5 +87,5 @@ struct CommandLineProcessor {
             return URL(fileURLWithPath: urlString).standardizedFileURL
         }
     }
-
+    
 }
