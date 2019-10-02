@@ -10,7 +10,7 @@ import AppKit
 
 extension NSColor {
     
-    private struct ColorComponents {
+    struct ColorComponents {
         var red: CGFloat
         var green: CGFloat
         var blue: CGFloat
@@ -73,9 +73,9 @@ extension NSColor {
         }
     }
 
-    private func colorComponents(scalingFactor: CGFloat) -> ColorComponents {
+    func colorComponents(scalingFactor: CGFloat) -> ColorComponents {
         var red: CGFloat = 0.0, green: CGFloat = 0.0, blue: CGFloat = 0.0, alpha: CGFloat = 0.0
-        self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        self.usingColorSpace(.sRGB)?.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
         return ColorComponents(red: red * scalingFactor, green: green * scalingFactor, blue: blue * scalingFactor,
                                alpha: alpha)
     }

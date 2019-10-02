@@ -5,10 +5,9 @@
 //  Created by Ross Butler on 5/20/17.
 //
 //
-
 import AppKit
 
-public enum TypographyColor {
+public indirect enum TypographyColor {
     
     // MARK: - Type definitions
     private struct RegEx {
@@ -40,6 +39,8 @@ public enum TypographyColor {
     case named(string: String)
     case rgb(red: Float, green: Float, blue: Float)
     case rgba(red: Float, green: Float, blue: Float, alpha: Float)
+    case dynamicColor(colors: [TypographyInterfaceStyle: TypographyColor])
+    case shade(shade: String, color: TypographyColor)
     
     // MARK: - Properties
     static var colorNameMap: [String: NSColor] {
@@ -107,6 +108,10 @@ public enum TypographyColor {
             return NSColor(red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha: 1.0)
         case .rgba(let red, let green, let blue, let alpha):
             return NSColor(red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha: CGFloat(alpha))
+        case .dynamicColor(let colorDictionary):
+            return colorDictionary[.light]?.nsColor ?? .black
+        case .shade(let shade, let color):
+            return color.nsColor.shade(shade)
         }
     }
     

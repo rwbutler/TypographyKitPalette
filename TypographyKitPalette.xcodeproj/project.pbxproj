@@ -22,6 +22,13 @@
 		13B0D6E020D94FF400339949 /* RegularExpressionMatchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B0D6DE20D94FF300339949 /* RegularExpressionMatchable.swift */; };
 		13B0D6E120D94FF400339949 /* String+RegularExpressionMatchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B0D6DF20D94FF400339949 /* String+RegularExpressionMatchable.swift */; };
 		13EFE0A420D9420E00A0B65D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EFE0A320D9420E00A0B65D /* main.swift */; };
+		BE4BD29A232008DF00F4EC06 /* ColorParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4BD299232008DF00F4EC06 /* ColorParser.swift */; };
+		BE4BD29C2320090500F4EC06 /* ParsingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4BD29B2320090500F4EC06 /* ParsingError.swift */; };
+		BE79097E23211B1900D1C137 /* ColorPaletteExportingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE79097D23211B1900D1C137 /* ColorPaletteExportingService.swift */; };
+		BE79098023211C9A00D1C137 /* ExportingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE79097F23211C9A00D1C137 /* ExportingService.swift */; };
+		BEA2277B2306C5AA005440BA /* TypographyInterfaceStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2277A2306C5AA005440BA /* TypographyInterfaceStyle.swift */; };
+		BEAA71B0230DA728001F50B1 /* AssetCatalogExportingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAA71AF230DA728001F50B1 /* AssetCatalogExportingService.swift */; };
+		BEAA71BC230EDB6E001F50B1 /* CatalogColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAA71BB230EDB6E001F50B1 /* CatalogColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -53,6 +60,13 @@
 		13B0D6DF20D94FF400339949 /* String+RegularExpressionMatchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+RegularExpressionMatchable.swift"; sourceTree = "<group>"; };
 		13EFE0A020D9420E00A0B65D /* palette */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = palette; sourceTree = BUILT_PRODUCTS_DIR; };
 		13EFE0A320D9420E00A0B65D /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		BE4BD299232008DF00F4EC06 /* ColorParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorParser.swift; sourceTree = "<group>"; };
+		BE4BD29B2320090500F4EC06 /* ParsingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsingError.swift; sourceTree = "<group>"; };
+		BE79097D23211B1900D1C137 /* ColorPaletteExportingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteExportingService.swift; sourceTree = "<group>"; };
+		BE79097F23211C9A00D1C137 /* ExportingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportingService.swift; sourceTree = "<group>"; };
+		BEA2277A2306C5AA005440BA /* TypographyInterfaceStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypographyInterfaceStyle.swift; sourceTree = "<group>"; };
+		BEAA71AF230DA728001F50B1 /* AssetCatalogExportingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCatalogExportingService.swift; sourceTree = "<group>"; };
+		BEAA71BB230EDB6E001F50B1 /* CatalogColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +94,7 @@
 		13317E2B22CB5E8A00C96CD9 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				BEAA71BA230EDB50001F50B1 /* Export */,
 				13317E3022CB5EC300C96CD9 /* Command Line */,
 				13317E2C22CB5E8E00C96CD9 /* Parsing */,
 			);
@@ -101,6 +116,7 @@
 			children = (
 				134AA2A220D943BE0002BBD8 /* JSONParsingService.swift */,
 				134AA2A520D943BE0002BBD8 /* PropertyListParsingService.swift */,
+				BE4BD299232008DF00F4EC06 /* ColorParser.swift */,
 			);
 			path = Implementation;
 			sourceTree = "<group>";
@@ -108,6 +124,7 @@
 		13317E2E22CB5E9D00C96CD9 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
+				BE4BD29B2320090500F4EC06 /* ParsingError.swift */,
 				134AA2A320D943BE0002BBD8 /* ParsingService.swift */,
 			);
 			name = Protocol;
@@ -118,6 +135,7 @@
 			children = (
 				134AA2A120D943BE0002BBD8 /* ParsingServiceResult.swift */,
 				134AA2B120D943F50002BBD8 /* TypographyColor.swift */,
+				BEA2277A2306C5AA005440BA /* TypographyInterfaceStyle.swift */,
 				134AA2AD20D943E60002BBD8 /* LetterCase.swift */,
 			);
 			path = Model;
@@ -182,6 +200,25 @@
 				13317E2922CB5D2200C96CD9 /* Extensions */,
 			);
 			path = TypographyKitPalette;
+			sourceTree = "<group>";
+		};
+		BE79098123211CB900D1C137 /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				BEAA71AF230DA728001F50B1 /* AssetCatalogExportingService.swift */,
+				BEAA71BB230EDB6E001F50B1 /* CatalogColor.swift */,
+				BE79097D23211B1900D1C137 /* ColorPaletteExportingService.swift */,
+			);
+			path = Implementation;
+			sourceTree = "<group>";
+		};
+		BEAA71BA230EDB50001F50B1 /* Export */ = {
+			isa = PBXGroup;
+			children = (
+				BE79097F23211C9A00D1C137 /* ExportingService.swift */,
+				BE79098123211CB900D1C137 /* Implementation */,
+			);
+			path = Export;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,19 +303,26 @@
 			files = (
 				13317E2822CB5CD900C96CD9 /* NSColorAdditions.swift in Sources */,
 				134AA2A820D943BE0002BBD8 /* ParsingService.swift in Sources */,
+				BEA2277B2306C5AA005440BA /* TypographyInterfaceStyle.swift in Sources */,
 				134AA2A720D943BE0002BBD8 /* JSONParsingService.swift in Sources */,
+				BE4BD29A232008DF00F4EC06 /* ColorParser.swift in Sources */,
 				1341B70820D94EFE004B4FB5 /* StringAdditions.swift in Sources */,
 				134AA2B220D943F50002BBD8 /* TypographyColor.swift in Sources */,
+				BE79097E23211B1900D1C137 /* ColorPaletteExportingService.swift in Sources */,
 				13B0D6E020D94FF400339949 /* RegularExpressionMatchable.swift in Sources */,
 				134AA2AA20D943BE0002BBD8 /* PropertyListParsingService.swift in Sources */,
 				13EFE0A420D9420E00A0B65D /* main.swift in Sources */,
 				134AA2B820D968EE0002BBD8 /* CommandLineArgument.swift in Sources */,
 				134AA2B420D944CC0002BBD8 /* ConfigurationType.swift in Sources */,
 				13B0D6E120D94FF400339949 /* String+RegularExpressionMatchable.swift in Sources */,
+				BE79098023211C9A00D1C137 /* ExportingService.swift in Sources */,
 				134AA2A920D943BE0002BBD8 /* TypographyKit.swift in Sources */,
 				134AA2A620D943BE0002BBD8 /* ParsingServiceResult.swift in Sources */,
 				134AA2B620D968E30002BBD8 /* CommandLineProcessor.swift in Sources */,
+				BEAA71BC230EDB6E001F50B1 /* CatalogColor.swift in Sources */,
 				134AA2AE20D943E60002BBD8 /* LetterCase.swift in Sources */,
+				BEAA71B0230DA728001F50B1 /* AssetCatalogExportingService.swift in Sources */,
+				BE4BD29C2320090500F4EC06 /* ParsingError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

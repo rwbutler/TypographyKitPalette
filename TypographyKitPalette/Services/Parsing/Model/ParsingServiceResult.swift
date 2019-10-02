@@ -8,5 +8,5 @@
 
 import AppKit
 
-public typealias TypographyColors = [String: NSColor]
+public typealias TypographyColors = [String: TypographyColor]
 typealias ParsingServiceResult = TypographyColors
