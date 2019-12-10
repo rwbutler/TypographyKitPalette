@@ -3,22 +3,21 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		13317E2822CB5CD900C96CD9 /* NSColorAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13317E2722CB5CD900C96CD9 /* NSColorAdditions.swift */; };
-		1341B70820D94EFE004B4FB5 /* StringAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1341B70720D94EFE004B4FB5 /* StringAdditions.swift */; };
 		134AA2A620D943BE0002BBD8 /* ParsingServiceResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134AA2A120D943BE0002BBD8 /* ParsingServiceResult.swift */; };
 		134AA2A720D943BE0002BBD8 /* JSONParsingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134AA2A220D943BE0002BBD8 /* JSONParsingService.swift */; };
 		134AA2A820D943BE0002BBD8 /* ParsingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134AA2A320D943BE0002BBD8 /* ParsingService.swift */; };
 		134AA2A920D943BE0002BBD8 /* TypographyKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134AA2A420D943BE0002BBD8 /* TypographyKit.swift */; };
 		134AA2AA20D943BE0002BBD8 /* PropertyListParsingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134AA2A520D943BE0002BBD8 /* PropertyListParsingService.swift */; };
-		134AA2AE20D943E60002BBD8 /* LetterCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134AA2AD20D943E60002BBD8 /* LetterCase.swift */; };
 		134AA2B220D943F50002BBD8 /* TypographyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134AA2B120D943F50002BBD8 /* TypographyColor.swift */; };
 		134AA2B420D944CC0002BBD8 /* ConfigurationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134AA2B320D944CC0002BBD8 /* ConfigurationType.swift */; };
 		134AA2B620D968E30002BBD8 /* CommandLineProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134AA2B520D968E30002BBD8 /* CommandLineProcessor.swift */; };
 		134AA2B820D968EE0002BBD8 /* CommandLineArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134AA2B720D968ED0002BBD8 /* CommandLineArgument.swift */; };
+		139A5AE923A02C83002A4A74 /* LetterCase in Frameworks */ = {isa = PBXBuildFile; productRef = 139A5AE823A02C83002A4A74 /* LetterCase */; };
 		13B0D6E020D94FF400339949 /* RegularExpressionMatchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B0D6DE20D94FF300339949 /* RegularExpressionMatchable.swift */; };
 		13B0D6E120D94FF400339949 /* String+RegularExpressionMatchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B0D6DF20D94FF400339949 /* String+RegularExpressionMatchable.swift */; };
 		13EFE0A420D9420E00A0B65D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EFE0A320D9420E00A0B65D /* main.swift */; };
@@ -45,13 +44,11 @@
 
 /* Begin PBXFileReference section */
 		13317E2722CB5CD900C96CD9 /* NSColorAdditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSColorAdditions.swift; sourceTree = "<group>"; };
-		1341B70720D94EFE004B4FB5 /* StringAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringAdditions.swift; sourceTree = "<group>"; };
 		134AA2A120D943BE0002BBD8 /* ParsingServiceResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsingServiceResult.swift; sourceTree = "<group>"; };
 		134AA2A220D943BE0002BBD8 /* JSONParsingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParsingService.swift; sourceTree = "<group>"; };
 		134AA2A320D943BE0002BBD8 /* ParsingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsingService.swift; sourceTree = "<group>"; };
 		134AA2A420D943BE0002BBD8 /* TypographyKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypographyKit.swift; sourceTree = "<group>"; };
 		134AA2A520D943BE0002BBD8 /* PropertyListParsingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyListParsingService.swift; sourceTree = "<group>"; };
-		134AA2AD20D943E60002BBD8 /* LetterCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LetterCase.swift; sourceTree = "<group>"; };
 		134AA2B120D943F50002BBD8 /* TypographyColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypographyColor.swift; sourceTree = "<group>"; };
 		134AA2B320D944CC0002BBD8 /* ConfigurationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationType.swift; sourceTree = "<group>"; };
 		134AA2B520D968E30002BBD8 /* CommandLineProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandLineProcessor.swift; sourceTree = "<group>"; };
@@ -74,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				139A5AE923A02C83002A4A74 /* LetterCase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,7 +83,6 @@
 			children = (
 				13B0D6DE20D94FF300339949 /* RegularExpressionMatchable.swift */,
 				13317E2722CB5CD900C96CD9 /* NSColorAdditions.swift */,
-				1341B70720D94EFE004B4FB5 /* StringAdditions.swift */,
 				13B0D6DF20D94FF400339949 /* String+RegularExpressionMatchable.swift */,
 			);
 			path = Extensions;
@@ -136,7 +133,6 @@
 				134AA2A120D943BE0002BBD8 /* ParsingServiceResult.swift */,
 				134AA2B120D943F50002BBD8 /* TypographyColor.swift */,
 				BEA2277A2306C5AA005440BA /* TypographyInterfaceStyle.swift */,
-				134AA2AD20D943E60002BBD8 /* LetterCase.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -238,6 +234,9 @@
 			dependencies = (
 			);
 			name = palette;
+			packageProductDependencies = (
+				139A5AE823A02C83002A4A74 /* LetterCase */,
+			);
 			productName = TypographyKitUtility;
 			productReference = 13EFE0A020D9420E00A0B65D /* palette */;
 			productType = "com.apple.product-type.tool";
@@ -249,7 +248,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0940;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1120;
 				TargetAttributes = {
 					13EFE09F20D9420E00A0B65D = {
 						CreatedOnToolsVersion = 9.4;
@@ -266,6 +265,9 @@
 				Base,
 			);
 			mainGroup = 13EFE09720D9420E00A0B65D;
+			packageReferences = (
+				139A5AE723A02C83002A4A74 /* XCRemoteSwiftPackageReference "lettercase" */,
+			);
 			productRefGroup = 13EFE0A120D9420E00A0B65D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -306,7 +308,6 @@
 				BEA2277B2306C5AA005440BA /* TypographyInterfaceStyle.swift in Sources */,
 				134AA2A720D943BE0002BBD8 /* JSONParsingService.swift in Sources */,
 				BE4BD29A232008DF00F4EC06 /* ColorParser.swift in Sources */,
-				1341B70820D94EFE004B4FB5 /* StringAdditions.swift in Sources */,
 				134AA2B220D943F50002BBD8 /* TypographyColor.swift in Sources */,
 				BE79097E23211B1900D1C137 /* ColorPaletteExportingService.swift in Sources */,
 				13B0D6E020D94FF400339949 /* RegularExpressionMatchable.swift in Sources */,
@@ -320,7 +321,6 @@
 				134AA2A620D943BE0002BBD8 /* ParsingServiceResult.swift in Sources */,
 				134AA2B620D968E30002BBD8 /* CommandLineProcessor.swift in Sources */,
 				BEAA71BC230EDB6E001F50B1 /* CatalogColor.swift in Sources */,
-				134AA2AE20D943E60002BBD8 /* LetterCase.swift in Sources */,
 				BEAA71B0230DA728001F50B1 /* AssetCatalogExportingService.swift in Sources */,
 				BE4BD29C2320090500F4EC06 /* ParsingError.swift in Sources */,
 			);
@@ -445,6 +445,7 @@
 		13EFE0A820D9420E00A0B65D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -454,6 +455,7 @@
 		13EFE0A920D9420E00A0B65D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -482,6 +484,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		139A5AE723A02C83002A4A74 /* XCRemoteSwiftPackageReference "lettercase" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rwbutler/lettercase";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		139A5AE823A02C83002A4A74 /* LetterCase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 139A5AE723A02C83002A4A74 /* XCRemoteSwiftPackageReference "lettercase" */;
+			productName = LetterCase;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 13EFE09820D9420E00A0B65D /* Project object */;
 }

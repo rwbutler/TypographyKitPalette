@@ -4,7 +4,9 @@
 //
 //  Created by Roger Smith on 05/09/2019.
 //
+
 import AppKit
+import LetterCase
 
 struct ColorPaletteExportingService: ExportingService {
     func export(colors: TypographyColors, colorListName: String) {

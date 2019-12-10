@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "LetterCase",
+        "repositoryURL": "https://github.com/rwbutler/lettercase",
+        "state": {
+          "branch": null,
+          "revision": "b128598bff23a14091045369738b51464eb1f314",
+          "version": "1.2.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

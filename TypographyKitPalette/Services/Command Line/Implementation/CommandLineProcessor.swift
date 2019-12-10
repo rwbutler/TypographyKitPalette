@@ -34,7 +34,7 @@ struct CommandLineProcessor {
     }
     
     private func printUsage() {
-        print("Must specify --color-list and --config-url arguments")
+        print("Must specify --color-list and either --config-url or --asset-catalog-url arguments")
     }
     
     private mutating func processArgument(_ argumentString: String) {
@@ -78,7 +78,6 @@ struct CommandLineProcessor {
         
         exit(0)
     }
-    
     
     private func url(urlString: String) -> URL? {
         if isHTTPURL(urlString: urlString) {
