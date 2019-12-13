@@ -1,7 +1,8 @@
 language: objective-c
 osx_image: xcode11
 install:
-  - ./install_swiftlint.sh
+  - brew install swiftformat
+  - brew install swiftlint
 script:
   - gem install travis
   - travis lint .travis.yml --no-interactive

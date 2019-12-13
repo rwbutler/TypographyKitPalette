@@ -66,16 +66,14 @@ struct CommandLineProcessor {
     private func processArguments(configURL: URL, colorListName: String) {
         TypographyKit.configurationURL = configURL
         TypographyKit.refresh()
-        
         let colors = TypographyKit.colors
-        
         if export.contains(.assetCatalog) {
             AssetCatalogExportingService(baseURL: assetCatalogURL).export(colors: colors, colorListName: colorListName)
-        }
-        if export.contains(.palette) {
+        } else if export.contains(.palette) {
+            ColorPaletteExportingService().export(colors: colors, colorListName: colorListName)
+        } else {
             ColorPaletteExportingService().export(colors: colors, colorListName: colorListName)
         }
-        
         exit(0)
     }
     

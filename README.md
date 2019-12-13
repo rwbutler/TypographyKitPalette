@@ -9,6 +9,8 @@
 
 Palette is a tool for use with [TypographyKit](https://github.com/rwbutler/TypographyKit) which takes your app's color palette as defined in your TypographyKit.json or TypographyKit.plist file and generates a palette for use in Xcode Interface Builder so that developers can easily make use of the same colors regardless of whether they are being assigned programmatically or through IB.
 
+In order to support dark mode in iOS 13 or higher, Palette now includes the option to export an asset catalog to host your dynamic colors.
+
 # Installation
 
 ## Homebrew
@@ -21,11 +23,21 @@ brew install rwbutler/tools/palette
 
 # Usage
 
-The palette tool is invoked as follows:
+## Color Palettes
 
-`palette --color-list <color palette name> --config-url <url>`
+In order to export a color palette for use in Xcode, Palette is invoked as follows:
+
+`palette --color-list <color palette name> --config-url <url> -export palette`
 
 Where the `--color-list` parameter specifies the name of the color palette as you wish it to appear in Interface Builder and `--config-url` specifies the URL to your [TypographyKit.json](https://github.com/rwbutler/TypographyKit/blob/master/Example/TypographyKit/TypographyKit.json) or [TypographyKit.plist](https://github.com/rwbutler/TypographyKit/blob/master/Example/TypographyKit/TypographyKit.plist) file. This may either be a path to a local file or remotely-hosted file using either `http` or `https` protocol.
+
+## Asset Catalogs
+
+In order to support dark mode in iOS 13, Palette now allows colors to be exported to asset catalogs. In order to export an asset catalog invoke palette as follows:
+
+`palette --color-list <asset catalog name> --config-url <url> -export assetCatalog --asset-catalog-url <directory to save asset catalog>`
+
+The `--color-list` parameter represents the name of the asset catalog to be exported and the `--asset-catalog-url` parameter represents the directory to which the asset catalog will be saved.
 
 ## Author
 

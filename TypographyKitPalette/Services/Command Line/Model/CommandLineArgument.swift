@@ -13,7 +13,7 @@ enum CommandLineArgument: String {
     case colorListName = "--color-list"
     case configURLShorthand = "-c"
     case configURL = "--config-url"
-    case assetCatalogURL = "--asset-catalog-path"
+    case assetCatalogURL = "--asset-catalog-url"
     case assetCatalogURLShorthand = "-a"
     case export = "--export"
     case exportShorthand = "-e"
