@@ -9,7 +9,16 @@ let package = Package(
     products: [
         .executable(name: "Palette", targets: ["TypographyKitPalette"])
     ],
+    dependencies: [
+        .package(url: "https://github.com/rwbutler/LetterCase.git", from: "1.6.1")
+    ],
     targets: [
-        .target(name: "TypographyKitPalette", path: "TypographyKitPalette")
+        .target(
+            name: "TypographyKitPalette", 
+            dependencies: [
+                .product(name: "LetterCase", package: "LetterCase")
+            ],
+            path: "TypographyKitPalette"
+        )
     ]
 )
