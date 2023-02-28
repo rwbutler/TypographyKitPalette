@@ -1,6 +1,6 @@
 //
 //  ColorParser.swift
-//  palette
+//  TypographyKit Palette
 //
 //  Created by Roger Smith on 02/08/2019.
 //
@@ -19,7 +19,7 @@ struct ColorParser {
     mutating func parseColors() -> TypographyColors {
         colors.forEach { (key, value) in
             backTrace = []
-            parseCol(key: key, value: value)
+            parseColor(key: key, value: value)
         }
         return typographyColors
     }
@@ -28,10 +28,14 @@ struct ColorParser {
 
 private extension ColorParser {
     
-    mutating func parseCol(key: String, value: Any?) {
-        if typographyColors[key] != nil { return } // Already Parsed
+    mutating func parseColor(key: String, value: Any?) {
+        if typographyColors[key] != nil {
+            return
+        } // Already Parsed.
     
-        if invalidColors[key] != nil { return } // Already found to be invalid
+        if invalidColors[key] != nil {
+            return
+        } // Already found to be invalid.
         
         backTrace.append(key)
         switch parseColor(key, value) {
@@ -50,7 +54,7 @@ private extension ColorParser {
     mutating func parseColor(_ key: String, _ value: Any?) -> ColorResult {
         switch value {
         case let dynamicDictionary as [String: String]:
-            return parseDynamicColor(dynamicDictionary)
+            return parseDynamicColor(name: key, colorDictionary: dynamicDictionary)
         case let value as String:
             return parseColorString(value)
         case .some:
@@ -124,7 +128,7 @@ private extension ColorParser {
 private extension ColorParser {
     
     mutating func parseAliasedColor(_ key: String, _ value: Any) -> TypographyColor? {
-        parseCol(key: key, value: value)
+        parseColor(key: key, value: value)
         return typographyColors[key]
     }
     
@@ -132,24 +136,26 @@ private extension ColorParser {
 
 // Dynamic Colors
 private extension ColorParser {
-    mutating func parseDynamicColor(_ colorDictionary: [String: String]) -> ColorResult {
+    
+    mutating func parseDynamicColor(name: String, colorDictionary: [String: String]) -> ColorResult {
         var colors: [TypographyInterfaceStyle: TypographyColor] = [:]
         
         colorDictionary.forEach { (styleName, value) in
-            guard let style = TypographyInterfaceStyle(rawValue: styleName.lowercased()) else { return }
+            guard let style = TypographyInterfaceStyle(rawValue: styleName.lowercased()) else {
+                return
+            }
             switch parseColorString(value) {
             case .success(let color):
                 colors[style] = color
-            case .failure(let error):
-                let logMessage = "TypographyKit \(styleName) \(error.localizedDescription)"
-                print(logMessage)
+            case .failure:
+                break
             }
         }
         
         guard colors[.light] != nil else {
-            return .failure(ParsingError.invalidDynamicColor)
+            return .failure(.invalidDynamicColor)
         }
-        return .success(.dynamicColor(colors: colors))
+        return .success(.dynamicColor(name: name, colors: colors))
     }
     
 }

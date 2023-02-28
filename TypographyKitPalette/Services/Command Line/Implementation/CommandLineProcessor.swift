@@ -13,7 +13,7 @@ struct CommandLineProcessor {
     var colorListName: String?
     var configURL: URL?
     var assetCatalogURL: URL?
-    var export: [Export] = [.assetCatalog, .palette]
+    var export: [Export] = []
     
     var currentlyPopulating: CommandLineArgument = .none
     

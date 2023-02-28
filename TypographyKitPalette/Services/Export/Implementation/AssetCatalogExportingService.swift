@@ -25,7 +25,7 @@ struct AssetCatalogExportingService: ExportingService {
         writeToFile(info, outputURL)
         
         exportColors(colors, catalogURL: assetCatalogURL)
-    
+        
     }
 }
 
@@ -41,23 +41,19 @@ private extension AssetCatalogExportingService {
             var colorVariants: [AssetCatalog.ColorVariant] = []
             
             switch typographyColor {
-            case .dynamicColor(let dynamicColors):
-                dynamicColors.forEach {
-                    let appearance = AssetCatalog.Appearance(value: $0.key.assetCatalogAppearanceValue)
-                    let variant = colorVariant(for: $0.value, appearance: appearance)
-                    colorVariants.append(variant)
-                    
-                    // As well as light and dark, named colors have an 'any' variant
-                    if $0.key == .light {
-                        let variant = colorVariant(for: $0.value)
-                        colorVariants.append(variant)
+            case .dynamicColor(_, let dynamicColors):
+                TypographyInterfaceStyle.allCases.forEach { interfaceStyle in
+                    guard let colorForInterfaceStyle = dynamicColors[interfaceStyle] else {
+                        return
                     }
+                    let appearance = AssetCatalog.Appearance(value: interfaceStyle.assetCatalogAppearanceValue)
+                    let variant = colorVariant(for: colorForInterfaceStyle, appearance: appearance)
+                    colorVariants.append(variant)
                 }
             default:
-                let variant = self.colorVariant(for: typographyColor)
+                let variant = colorVariant(for: typographyColor)
                 colorVariants.append(variant)
             }
-            
             let colorsJSON = AssetCatalog.CatalogColor(colors: colorVariants)
             writeToFile(colorsJSON, outputURL)
         }
@@ -66,9 +62,11 @@ private extension AssetCatalogExportingService {
     func writeToFile<EncodableType: Encodable>(_ codable: EncodableType, _ outputURL: URL) {
         do {
             let directoryURL = outputURL.deletingLastPathComponent()
-            try FileManager.default.createDirectory(at: directoryURL,
-                                                    withIntermediateDirectories: true,
-                                                    attributes: nil)
+            try FileManager.default.createDirectory(
+                at: directoryURL,
+                withIntermediateDirectories: true,
+                attributes: nil
+            )
             let jsonEncoder = JSONEncoder()
             let data = try jsonEncoder.encode(codable)
             try data.write(to: outputURL)
@@ -79,16 +77,18 @@ private extension AssetCatalogExportingService {
     }
     
     func colorVariant(for color: TypographyColor, appearance: AssetCatalog.Appearance? = nil)
-        -> AssetCatalog.ColorVariant {
+    -> AssetCatalog.ColorVariant {
         let colorComponents: AssetCatalog.ColorComponents
-        
         switch color {
-        case .dynamicColor(let colors):
+        case .dynamicColor(_, let colors):
             if let darkColor = colors[.dark] {
                 return colorVariant(for: darkColor, appearance: appearance)
             }
+            if let lightColor = colors[.light] {
+                return colorVariant(for: lightColor, appearance: appearance)
+            }
             fatalError()
-        case .hex(let hexString):
+        case .hexWithoutAlpha(let hexString), .hexWithAlpha(let hexString):
             colorComponents = AssetCatalog.ColorComponents(hexString: hexString)
         case .rgb(let red, let green, let blue):
             colorComponents = AssetCatalog.ColorComponents(red: red, alpha: 1, green: green, blue: blue)
@@ -96,12 +96,13 @@ private extension AssetCatalogExportingService {
             colorComponents = AssetCatalog.ColorComponents(red: red, alpha: alpha, green: green, blue: blue)
         default:
             let colorCs = color.nsColor.colorComponents(scalingFactor: 1)
-            colorComponents = AssetCatalog.ColorComponents(red: colorCs.red,
-                                                           alpha: colorCs.alpha,
-                                                           green: colorCs.green,
-                                                           blue: colorCs.blue)
+            colorComponents = AssetCatalog.ColorComponents(
+                red: colorCs.red,
+                alpha: colorCs.alpha,
+                green: colorCs.green,
+                blue: colorCs.blue
+            )
         }
-        
         let appearances = [appearance].compactMap { $0 }
         let colorInfo = AssetCatalog.SRGBColor(components: colorComponents)
         let color = AssetCatalog.ColorVariant(appearances: appearances, color: colorInfo)

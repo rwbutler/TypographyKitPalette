@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum TypographyInterfaceStyle: String {
+public enum TypographyInterfaceStyle: String, CaseIterable {
     case light
     case dark
     
