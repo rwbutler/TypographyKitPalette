@@ -8,7 +8,7 @@
 import Foundation
 import AppKit
 
-struct CommandLineProcessor {
+public struct CommandLineProcessor {
     
     var colorListName: String?
     var configURL: URL?
@@ -17,7 +17,13 @@ struct CommandLineProcessor {
     
     var currentlyPopulating: CommandLineArgument = .none
     
-    mutating func main() {
+    public init(colorListName: String? = nil, configURL: URL? = nil, assetCatalogURL: URL? = nil) {
+        self.colorListName = colorListName
+        self.configURL = configURL
+        self.assetCatalogURL = assetCatalogURL
+    }
+    
+    public mutating func main() {
         for index in 1 ..< CommandLine.arguments.count {
             processArgument(CommandLine.arguments[index])
         }

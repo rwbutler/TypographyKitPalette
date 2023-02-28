@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.6
 import PackageDescription
 
 let package = Package(
@@ -7,18 +7,36 @@ let package = Package(
         .macOS(.v10_13)
     ],
     products: [
-        .executable(name: "Palette", targets: ["TypographyKitPalette"])
+        .library(name: "TypographyKitPalette", targets: ["TypographyKitPalette"]),
+        .executable(name: "Palette", targets: ["Palette"]),
+        .plugin(name: "GenerateAssetCatalog", targets: ["AssetCatalogPlugin"])
     ],
     dependencies: [
-        .package(url: "https://github.com/rwbutler/LetterCase.git", from: "1.6.1")
     ],
     targets: [
         .target(
-            name: "TypographyKitPalette", 
-            dependencies: [
-                .product(name: "LetterCase", package: "LetterCase")
-            ],
+            name: "TypographyKitPalette",
             path: "TypographyKitPalette"
+        ),
+        .executableTarget(
+            name: "Palette",
+            dependencies: [
+                .target(name: "TypographyKitPalette")
+            ],
+            path: "code/tools"
+        ),
+        .plugin(
+            name: "AssetCatalogPlugin",
+            capability: .command(
+                intent: .custom(
+                    verb: "generate-asset-catalog",
+                    description: "Generate asset catalog containing TypographKit colors."
+                )
+            ),
+            dependencies: [
+                .target(name: "TypographyKitPalette")
+            ],
+            path: "code/plugins/asset-catalog"
         )
     ]
 )

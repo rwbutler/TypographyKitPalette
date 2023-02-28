@@ -6,16 +6,14 @@
 //
 
 import AppKit
-import LetterCase
 
 struct ColorPaletteExportingService: ExportingService {
     func export(colors: TypographyColors, colorListName: String) {
         let colorList = NSColorList(name: colorListName)
         let sortedColors = colors.sorted { $0.key < $1.key }
         
-       sortedColors.forEach { (arg) in
-            let (colorName, color) = arg
-            colorList.setColor(color.nsColor, forKey: colorName.capitalized())
+       sortedColors.forEach { (colorName, color) in
+           colorList.setColor(color.nsColor, forKey: colorName.capitalized)
         }
         
         var outputURL = FileManager.default.homeDirectoryForCurrentUser

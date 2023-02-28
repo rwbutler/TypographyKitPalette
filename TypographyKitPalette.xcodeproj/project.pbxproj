@@ -21,6 +21,7 @@
 		13B0D6E020D94FF400339949 /* RegularExpressionMatchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B0D6DE20D94FF300339949 /* RegularExpressionMatchable.swift */; };
 		13B0D6E120D94FF400339949 /* String+RegularExpressionMatchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B0D6DF20D94FF400339949 /* String+RegularExpressionMatchable.swift */; };
 		13EFE0A420D9420E00A0B65D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EFE0A320D9420E00A0B65D /* main.swift */; };
+		30C53E3929AE39CE00852656 /* PalettePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C53E3829AE39CE00852656 /* PalettePlugin.swift */; };
 		BE4BD29A232008DF00F4EC06 /* ColorParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4BD299232008DF00F4EC06 /* ColorParser.swift */; };
 		BE4BD29C2320090500F4EC06 /* ParsingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4BD29B2320090500F4EC06 /* ParsingError.swift */; };
 		BE79097E23211B1900D1C137 /* ColorPaletteExportingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE79097D23211B1900D1C137 /* ColorPaletteExportingService.swift */; };
@@ -57,6 +58,7 @@
 		13B0D6DF20D94FF400339949 /* String+RegularExpressionMatchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+RegularExpressionMatchable.swift"; sourceTree = "<group>"; };
 		13EFE0A020D9420E00A0B65D /* palette */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = palette; sourceTree = BUILT_PRODUCTS_DIR; };
 		13EFE0A320D9420E00A0B65D /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		30C53E3829AE39CE00852656 /* PalettePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalettePlugin.swift; sourceTree = "<group>"; };
 		BE4BD299232008DF00F4EC06 /* ColorParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorParser.swift; sourceTree = "<group>"; };
 		BE4BD29B2320090500F4EC06 /* ParsingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsingError.swift; sourceTree = "<group>"; };
 		BE79097D23211B1900D1C137 /* ColorPaletteExportingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteExportingService.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				13EFE0A320D9420E00A0B65D /* main.swift */,
+				30C53E3829AE39CE00852656 /* PalettePlugin.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 			files = (
 				13317E2822CB5CD900C96CD9 /* NSColorAdditions.swift in Sources */,
 				134AA2A820D943BE0002BBD8 /* ParsingService.swift in Sources */,
+				30C53E3929AE39CE00852656 /* PalettePlugin.swift in Sources */,
 				BEA2277B2306C5AA005440BA /* TypographyInterfaceStyle.swift in Sources */,
 				134AA2A720D943BE0002BBD8 /* JSONParsingService.swift in Sources */,
 				BE4BD29A232008DF00F4EC06 /* ColorParser.swift in Sources */,
