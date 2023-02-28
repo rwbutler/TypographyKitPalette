@@ -4,7 +4,8 @@ import PackageDescription
 let package = Package(
     name: "Palette",
     platforms: [
-        .macOS(.v10_13)
+        .iOS("13.0"),
+        .macOS("10.15")
     ],
     products: [
         .library(name: "TypographyKitPalette", targets: ["TypographyKitPalette"]),
