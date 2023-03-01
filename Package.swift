@@ -10,7 +10,8 @@ let package = Package(
     products: [
         .library(name: "TypographyKitPalette", targets: ["TypographyKitPalette"]),
         .executable(name: "Palette", targets: ["Palette"]),
-        .plugin(name: "GenerateAssetCatalog", targets: ["AssetCatalogPlugin"])
+        .plugin(name: "TKPaletteGenerateAssetCatalog", targets: ["PaletteAssetCatalogPlugin"]),
+        //.plugin(name: "GenerateAssetCatalog", targets: ["AssetCatalogPlugin"])
     ],
     dependencies: [
     ],
@@ -27,17 +28,28 @@ let package = Package(
             path: "code/tools"
         ),
         .plugin(
+            name: "PaletteAssetCatalogPlugin",
+            capability: .buildTool(),
+            dependencies: [
+                .target(name: "Palette")
+            ],
+            path: "code/plugins/asset-catalog"
+        ),
+        /*.plugin(
             name: "AssetCatalogPlugin",
             capability: .command(
                 intent: .custom(
                     verb: "generate-asset-catalog",
                     description: "Generate asset catalog containing TypographKit colors."
-                )
+                ),
+                permissions: [
+                  .writeToPackageDirectory(reason: "This command generates asset catalogs")
+                ]
             ),
             dependencies: [
                 .target(name: "TypographyKitPalette")
             ],
             path: "code/plugins/asset-catalog"
-        )
+        )*/
     ]
 )
