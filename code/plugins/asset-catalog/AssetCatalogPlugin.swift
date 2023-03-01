@@ -38,12 +38,14 @@ struct PalettePlugin: CommandPlugin {
     func export(tool: PluginContext.Tool, model: ExportModel) throws {
         let paletteExec = URL(fileURLWithPath: tool.path.string)
         
-        var arguments: [String] = ["export"]
+        var arguments: [String] = []
         switch model {
         case let .colorList(configURL, name):
+            arguments.append(contentsOf: ["--export", "palette"])
             arguments.append(contentsOf: ["--config-url", configURL.absoluteString])
             arguments.append(contentsOf: ["--color-list", name])
         case let .assetCatalog(configURL, name, assetCatalogURL):
+            arguments.append(contentsOf: ["--export", "assetCatalog"])
             arguments.append(contentsOf: ["--asset-catalog-url", assetCatalogURL.absoluteString])
             arguments.append(contentsOf: ["--config-url", configURL.absoluteString])
             arguments.append(contentsOf: ["--color-list", name])
@@ -86,7 +88,7 @@ struct PalettePlugin: CommandPlugin {
     }
 
     func perform(in directory: PackagePlugin.Path, context: PluginToolProviding, arguments: [String]) throws {
-        let palette = try context.tool(named: "TypographyKitPalette")
+        let palette = try context.tool(named: "Palette")
         var argExtractor = ArgumentExtractor(arguments)
         let exportRawValue = argExtractor.extractOption(named: "export").first ?? ""
         let exportOption = ExportOption(rawValue: exportRawValue) ?? .assetCatalog
@@ -128,7 +130,14 @@ extension PalettePlugin: XcodeCommandPlugin {
         var argExtractor = ArgumentExtractor(arguments)
         _ = argExtractor.extractOption(named: "target")
 
-        try perform(in: context.xcodeProject.directory, context: context, arguments: arguments)
+
+        let argumentsWithConfig = arguments + [
+            "--asset-catalog-url", context.xcodeProject.directory.string,
+            "--color-list", "TypographyKit",
+            "--config-url", context.xcodeProject.directory.appending(["typography-kit.json"]).string
+        ]
+
+        try perform(in: context.xcodeProject.directory, context: context, arguments: argumentsWithConfig)
     }
 }
 #endif

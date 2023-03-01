@@ -32,10 +32,13 @@ let package = Package(
                 intent: .custom(
                     verb: "generate-asset-catalog",
                     description: "Generate asset catalog containing TypographKit colors."
-                )
+                ),
+                permissions: [
+                    .writeToPackageDirectory(reason: "This command exports asset catalog"),
+                ]
             ),
             dependencies: [
-                .target(name: "TypographyKitPalette")
+                .target(name: "Palette")
             ],
             path: "code/plugins/asset-catalog"
         )
