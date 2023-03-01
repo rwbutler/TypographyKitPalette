@@ -8,6 +8,21 @@
 import Foundation
 import PackagePlugin
 
+
+#if swift(>=5.6)
+protocol PluginToolProviding {
+    func tool(named name: String) throws -> PackagePlugin.PluginContext.Tool
+}
+
+extension PluginContext: PluginToolProviding {}
+
+#if canImport(XcodeProjectPlugin)
+import XcodeProjectPlugin
+
+extension XcodePluginContext: PluginToolProviding {}
+#endif
+#endif
+
 enum ExportOption: String {
     case assetCatalog
     case palette
@@ -50,12 +65,33 @@ struct PalettePlugin: CommandPlugin {
     }
     
     func performCommand(context: PluginContext, arguments: [String]) throws {
-        let palette = try context.tool(named: "palette")
+        if arguments.contains("--verbose") {
+            print("Command plugin execution with arguments \(arguments.description) for Swift package \(context.package.displayName). All target information: \(context.package.targets.description)")
+        }
+
+        var targetsToProcess: [Target] = context.package.targets
+
+        var argExtractor = ArgumentExtractor(arguments)
+        let selectedTargets = argExtractor.extractOption(named: "target")
+
+        if selectedTargets.isEmpty == false {
+            targetsToProcess = context.package.targets.filter { selectedTargets.contains($0.name) }.map { $0 }
+        }
+
+        for target in targetsToProcess {
+            guard let target = target as? SourceModuleTarget else { continue }
+
+            try perform(in: target.directory, context: context, arguments: argExtractor.remainingArguments)
+        }
+    }
+
+    func perform(in directory: PackagePlugin.Path, context: PluginToolProviding, arguments: [String]) throws {
+        let palette = try context.tool(named: "TypographyKitPalette")
         var argExtractor = ArgumentExtractor(arguments)
         let exportRawValue = argExtractor.extractOption(named: "export").first ?? ""
         let exportOption = ExportOption(rawValue: exportRawValue) ?? .assetCatalog
         let configURLStr = argExtractor.extractOption(named: "config-url")
-        
+
         guard let configURL = URL(string: configURLStr.first ?? "") else {
             Diagnostics.error("palette invocation failed: TypographyKit configuration URL not specified.")
             return
@@ -89,7 +125,10 @@ import XcodeProjectPlugin
 
 extension PalettePlugin: XcodeCommandPlugin {
     func performCommand(context: XcodePluginContext, arguments: [String]) throws {
-        
+        var argExtractor = ArgumentExtractor(arguments)
+        _ = argExtractor.extractOption(named: "target")
+
+        try perform(in: context.xcodeProject.directory, context: context, arguments: arguments)
     }
 }
 #endif
